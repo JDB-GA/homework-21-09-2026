@@ -105,8 +105,11 @@ public class Solution {
 
     @GetMapping("/update-interest")
     public ResponseEntity<Map<String, Object>> updateInterest(@RequestParam String value, @RequestParam String updatedValue) {
-        this.interests.remove(value);
-        this.interests.add(updatedValue);
+        int index = this.interests.indexOf(value);
+
+        if (index != -1) {
+            this.interests.set(index, updatedValue);
+        }
         return ResponseEntity.ok(Map.of("Current Interests", this.interests));
     }
 
